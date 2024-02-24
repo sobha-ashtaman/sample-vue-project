@@ -1,6 +1,5 @@
 <script setup>
     import LayoutAdmin from './../../layouts/LayoutAdmin.vue'
-    import axios from 'axios';
     import { onBeforeMount, ref, watch } from 'vue';
     import { useAuthStore } from '@/stores/auth';
 
