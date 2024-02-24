@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', ()=>{
     const processing_login = ref(false);
     const login_errors = ref(null);
     const router = useRouter();
+    const currentUser = ref(null);
     const login = async (credentials)=>{
         await axios.post(`${import.meta.env.VITE_API_URL}/login`, {email: credentials.email.value, password: credentials.password.value})
         .then((response)=>{
@@ -29,7 +30,8 @@ export const useAuthStore = defineStore('auth', ()=>{
             }
         })
         .then((response)=>{
-            return response.data.data.user;
+            currentUser.value =  response.data.data.user;
+            console.log(currentUser.value);
         }).catch((error)=>{
             return false;
         })
@@ -40,5 +42,5 @@ export const useAuthStore = defineStore('auth', ()=>{
         router.push('/admin');
     }
 
-    return {login, processing_login, login_errors, getUser};
+    return {login, processing_login, login_errors, getUser, currentUser};
 })
